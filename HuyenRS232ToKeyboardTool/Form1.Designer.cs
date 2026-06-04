@@ -605,7 +605,7 @@
             this.proName.BackColor = System.Drawing.Color.Transparent;
             this.proName.Font = new System.Drawing.Font("宋体", 12F);
             this.proName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.proName.Location = new System.Drawing.Point(4, 124);
+            this.proName.Location = new System.Drawing.Point(3, 126);
             this.proName.MinimumSize = new System.Drawing.Size(16, 16);
             this.proName.Name = "proName";
             this.proName.Size = new System.Drawing.Size(541, 20);
