@@ -115,7 +115,7 @@
             // 
             this.tabPage1.Location = new System.Drawing.Point(201, 0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(551, 376);
+            this.tabPage1.Size = new System.Drawing.Size(551, 459);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -570,7 +570,7 @@
             this.uiCheckBox17.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.uiCheckBox17.Size = new System.Drawing.Size(153, 35);
             this.uiCheckBox17.TabIndex = 53;
-            this.uiCheckBox17.Text = "2";
+            this.uiCheckBox17.Text = "WinPostMessage";
             // 
             // uiCheckBox18
             // 
@@ -605,7 +605,7 @@
             this.proName.BackColor = System.Drawing.Color.Transparent;
             this.proName.Font = new System.Drawing.Font("宋体", 12F);
             this.proName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.proName.Location = new System.Drawing.Point(4, 124);
+            this.proName.Location = new System.Drawing.Point(3, 126);
             this.proName.MinimumSize = new System.Drawing.Size(16, 16);
             this.proName.Name = "proName";
             this.proName.Size = new System.Drawing.Size(541, 20);
