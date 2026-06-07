@@ -525,6 +525,8 @@ namespace HuyenRS232ToKeyboardTool
                     case "PostMessage":
                         radioPostMessage.Checked = true;
                         break;
+                    default: radioPostMessage.Checked = true;
+                        break;
                 }
                 ShowLogs("配置加载成功", Color.Green);
                 this.ShowSuccessNotifier("配置已加载...");
