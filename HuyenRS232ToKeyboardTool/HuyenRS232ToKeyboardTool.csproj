@@ -98,6 +98,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\WindowConfig.cs" />
+    <Compile Include="Model\WindowInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MouseHook.cs" />
