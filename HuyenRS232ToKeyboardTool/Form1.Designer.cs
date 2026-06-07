@@ -191,7 +191,7 @@
             this.btnStart.Location = new System.Drawing.Point(6, 7);
             this.btnStart.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(123, 116);
+            this.btnStart.Size = new System.Drawing.Size(123, 131);
             this.btnStart.TabIndex = 121;
             this.btnStart.Text = "uiTurnSwitch2";
             // 
