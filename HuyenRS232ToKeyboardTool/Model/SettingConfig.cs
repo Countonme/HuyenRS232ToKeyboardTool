@@ -165,5 +165,9 @@ namespace HuyenRS232ToKeyboardTool.Model
         /// 是否添加换行符
         /// </summary>
         public bool LineFeedFlag { get; set; }
+        /// <summary>
+        /// 发送模式，
+        /// </summary>
+        public string sendMode { get; set; }
     }
 }

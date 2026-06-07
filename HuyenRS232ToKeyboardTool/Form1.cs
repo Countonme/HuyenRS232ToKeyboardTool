@@ -29,7 +29,7 @@ namespace HuyenRS232ToKeyboardTool
         // private SerialPort serialPort1, serialPort2, serialPort3, serialPort4, serialPort5, serialPort6, serialPort7, serialPort8;
         private SerialPort[] _serialPortsList = null;
         private SettingConfig _config = new SettingConfig();
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]        private static extern IntPtr FindWindow(    string lpClassName,    string lpWindowName);
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)] private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -38,6 +38,16 @@ namespace HuyenRS232ToKeyboardTool
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
         private const int SW_RESTORE = 9;
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        private const uint WM_CHAR = 0x0102;
+
+        private const uint WM_KEYDOWN = 0x0100;
+        private const uint WM_KEYUP = 0x0101;
+        private const int VK_RETURN = 0x0D;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -63,20 +73,17 @@ namespace HuyenRS232ToKeyboardTool
         /// <exception cref="NotImplementedException"></exception>
         private void BtnSendMsgTest_Click(object sender, EventArgs e)
         {
-            SendBarcode(txtwindownTitle.Text, "Testting..."+Guid.NewGuid().ToString("N"));
+            SendBarcode(txtwindownTitle.Text, "Testting..." + Guid.NewGuid().ToString("N"));
         }
-        /// <summary>
-        /// SendBarcode 方法用于将条码数据发送到指定窗口，首先通过窗口标题查找窗口句柄，如果找到则将窗口恢复并置于前台，然后使用 SendKeys 将条码数据发送到该窗口。
-        /// </summary>
-        /// <param name="windowTitle"></param>
-        /// <param name="barcode"></param>
+
+
         public void SendBarcode(string windowTitle, string barcode)
         {
             IntPtr hwnd = FindWindow(null, windowTitle);
 
             if (hwnd == IntPtr.Zero)
             {
-                ShowLogs($"找不到窗口: {windowTitle}", Color.Red);
+                ShowLogs($"找不到窗口:{windowTitle}", Color.Red);
                 return;
             }
 
@@ -84,12 +91,60 @@ namespace HuyenRS232ToKeyboardTool
 
             SetForegroundWindow(hwnd);
 
-            Thread.Sleep(200);
+            Thread.Sleep(100);
 
-            SendKeys.SendWait(barcode);
-            SendKeys.SendWait("{ENTER}");
+            // 模式1：SendKeys
+            if (radioSendKeys.Checked)
+            {
+                SendKeys.SendWait(barcode);
+
+                if (checkBoxCarriageReturn.Checked)
+                    SendKeys.SendWait("{ENTER}");
+
+                return;
+            }
+
+            // 模式2：Clipboard + Ctrl+V
+            if (radioClipboard.Checked)
+            {
+                Clipboard.SetText(barcode);
+
+                SendKeys.SendWait("^v");
+
+                if (checkBoxCarriageReturn.Checked)
+                    SendKeys.SendWait("{ENTER}");
+
+                return;
+            }
+
+            // 模式3：PostMessage
+            if (radioPostMessage.Checked)
+            {
+                SendTextByPostMessage(hwnd, barcode);
+
+                SendCRLF(hwnd);
+
+                return;
+            }
         }
 
+        /// <summary>
+        /// 根据用户选择的回车换行设置，发送对应的消息到目标窗口
+        /// </summary>
+        /// <param name="hwnd"></param>
+        private void SendCRLF(IntPtr hwnd)
+        {
+            if (checkBoxCarriageReturn.Checked)
+            {
+                PostMessage(hwnd, WM_KEYDOWN, (IntPtr)VK_RETURN, IntPtr.Zero);
+                PostMessage(hwnd, WM_KEYUP, (IntPtr)VK_RETURN, IntPtr.Zero);
+            }
+
+            if (checkBoxLineFeed.Checked)
+            {
+                PostMessage(hwnd, WM_CHAR, (IntPtr)10, IntPtr.Zero);
+            }
+        }
         /// <summary>
         /// 打开功能按钮点击事件，目前未实现具体功能，后续根据需求添加对应逻辑
         /// </summary>
@@ -165,7 +220,8 @@ namespace HuyenRS232ToKeyboardTool
                 readTimeout = readTimeout.Value,
                 LineFeedFlag = checkBoxLineFeed.Checked,
                 CarriageReturnFlag = checkBoxCarriageReturn.Checked,
-                windownTitle = txtwindownTitle.Text
+                windownTitle = txtwindownTitle.Text,
+                sendMode = radioSendKeys.Checked ? "SendKeys" : (radioClipboard.Checked ? "Clipboard" : "PostMessage")
 
             };
 
@@ -458,7 +514,18 @@ namespace HuyenRS232ToKeyboardTool
                 txtwindownTitle.Text = _config.windownTitle;
                 checkBoxCarriageReturn.Checked = _config.CarriageReturnFlag;
                 checkBoxLineFeed.Checked = _config.LineFeedFlag;
-
+                switch (_config.sendMode)
+                {
+                    case "SendKeys":
+                        radioSendKeys.Checked = true;
+                        break;
+                    case "Clipboard":
+                        radioClipboard.Checked = true;
+                        break;
+                    case "PostMessage":
+                        radioPostMessage.Checked = true;
+                        break;
+                }
                 ShowLogs("配置加载成功", Color.Green);
                 this.ShowSuccessNotifier("配置已加载...");
             }
@@ -525,6 +592,18 @@ namespace HuyenRS232ToKeyboardTool
             {
                 ShowLogs($"{port.PortName} 打开失败: {ex.Message}", Color.Red);
                 this.ShowErrorNotifier($"{port.PortName} 打开失败: {ex.Message}");
+            }
+        }
+
+        private void SendTextByPostMessage(IntPtr hwnd, string text)
+        {
+            foreach (char c in text)
+            {
+                PostMessage(
+                    hwnd,
+                    WM_CHAR,
+                    (IntPtr)c,
+                    IntPtr.Zero);
             }
         }
     }

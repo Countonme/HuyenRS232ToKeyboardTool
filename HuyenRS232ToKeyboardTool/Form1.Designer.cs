@@ -43,7 +43,7 @@
             this.proName = new Sunny.UI.UILine();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.checkBoxCarriageReturn = new Sunny.UI.UICheckBox();
-            this.uiRadioButton1 = new Sunny.UI.UIRadioButton();
+            this.radioSendKeys = new Sunny.UI.UIRadioButton();
             this.checkBoxLineFeed = new Sunny.UI.UICheckBox();
             this.btnRefresh = new Sunny.UI.UISymbolButton();
             this.btnSave = new Sunny.UI.UISymbolButton();
@@ -74,6 +74,9 @@
             this.checkBoxChannel3 = new Sunny.UI.UICheckBox();
             this.checkBoxChannel2 = new Sunny.UI.UICheckBox();
             this.checkBoxChannel1 = new Sunny.UI.UICheckBox();
+            this.radioClipboard = new Sunny.UI.UIRadioButton();
+            this.radioPostMessage = new Sunny.UI.UIRadioButton();
+            this.uiRadioButton4 = new Sunny.UI.UIRadioButton();
             this.uiGroupBox1.SuspendLayout();
             this.uiTabControlMenu1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -279,8 +282,11 @@
             // 
             // uiGroupBox2
             // 
+            this.uiGroupBox2.Controls.Add(this.uiRadioButton4);
+            this.uiGroupBox2.Controls.Add(this.radioPostMessage);
+            this.uiGroupBox2.Controls.Add(this.radioClipboard);
             this.uiGroupBox2.Controls.Add(this.checkBoxCarriageReturn);
-            this.uiGroupBox2.Controls.Add(this.uiRadioButton1);
+            this.uiGroupBox2.Controls.Add(this.radioSendKeys);
             this.uiGroupBox2.Controls.Add(this.checkBoxLineFeed);
             this.uiGroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.uiGroupBox2.Location = new System.Drawing.Point(356, 263);
@@ -306,23 +312,23 @@
             this.checkBoxCarriageReturn.TabIndex = 58;
             this.checkBoxCarriageReturn.Text = "Carriage Return";
             // 
-            // uiRadioButton1
+            // radioSendKeys
             // 
-            this.uiRadioButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiRadioButton1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiRadioButton1.Location = new System.Drawing.Point(3, 35);
-            this.uiRadioButton1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiRadioButton1.Name = "uiRadioButton1";
-            this.uiRadioButton1.Size = new System.Drawing.Size(150, 29);
-            this.uiRadioButton1.TabIndex = 57;
-            this.uiRadioButton1.Text = "SendKeys";
+            this.radioSendKeys.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioSendKeys.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioSendKeys.Location = new System.Drawing.Point(3, 35);
+            this.radioSendKeys.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioSendKeys.Name = "radioSendKeys";
+            this.radioSendKeys.Size = new System.Drawing.Size(150, 20);
+            this.radioSendKeys.TabIndex = 57;
+            this.radioSendKeys.Text = "SendKeys";
             // 
             // checkBoxLineFeed
             // 
             this.checkBoxLineFeed.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBoxLineFeed.Font = new System.Drawing.Font("宋体", 12F);
             this.checkBoxLineFeed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.checkBoxLineFeed.Location = new System.Drawing.Point(3, 141);
+            this.checkBoxLineFeed.Location = new System.Drawing.Point(3, 139);
             this.checkBoxLineFeed.MinimumSize = new System.Drawing.Size(1, 1);
             this.checkBoxLineFeed.Name = "checkBoxLineFeed";
             this.checkBoxLineFeed.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
@@ -673,6 +679,40 @@
             this.checkBoxChannel1.TabIndex = 52;
             this.checkBoxChannel1.Text = "1";
             // 
+            // radioClipboard
+            // 
+            this.radioClipboard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioClipboard.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioClipboard.Location = new System.Drawing.Point(3, 61);
+            this.radioClipboard.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioClipboard.Name = "radioClipboard";
+            this.radioClipboard.Size = new System.Drawing.Size(150, 20);
+            this.radioClipboard.TabIndex = 59;
+            this.radioClipboard.Text = "Clipboard";
+            // 
+            // radioPostMessage
+            // 
+            this.radioPostMessage.Checked = true;
+            this.radioPostMessage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioPostMessage.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioPostMessage.Location = new System.Drawing.Point(3, 87);
+            this.radioPostMessage.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioPostMessage.Name = "radioPostMessage";
+            this.radioPostMessage.Size = new System.Drawing.Size(150, 20);
+            this.radioPostMessage.TabIndex = 60;
+            this.radioPostMessage.Text = "PostMessage";
+            // 
+            // uiRadioButton4
+            // 
+            this.uiRadioButton4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiRadioButton4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiRadioButton4.Location = new System.Drawing.Point(3, 113);
+            this.uiRadioButton4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiRadioButton4.Name = "uiRadioButton4";
+            this.uiRadioButton4.Size = new System.Drawing.Size(150, 20);
+            this.uiRadioButton4.TabIndex = 61;
+            this.uiRadioButton4.Text = "SendKeys";
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -736,11 +776,14 @@
         private Sunny.UI.UISymbolButton uiSymbolButton1;
         private Sunny.UI.UITitlePanel uiTitlePanel2;
         private Sunny.UI.UIIntegerUpDown readTimeout;
-        private Sunny.UI.UIRadioButton uiRadioButton1;
+        private Sunny.UI.UIRadioButton radioSendKeys;
         private Sunny.UI.UICheckBox checkBoxCarriageReturn;
         private Sunny.UI.UITextBox txtwindownTitle;
         private Sunny.UI.UISymbolButton btnSendMsgTest;
         private Sunny.UI.UITurnSwitch btnStart;
+        private Sunny.UI.UIRadioButton radioPostMessage;
+        private Sunny.UI.UIRadioButton radioClipboard;
+        private Sunny.UI.UIRadioButton uiRadioButton4;
     }
 }
 
