@@ -97,10 +97,7 @@ namespace HuyenRS232ToKeyboardTool
             if (radioSendKeys.Checked)
             {
                 SendKeys.SendWait(barcode);
-
-                if (checkBoxCarriageReturn.Checked)
-                    SendKeys.SendWait("{ENTER}");
-
+                SendSendKeysCRLF();
                 return;
             }
 
@@ -110,9 +107,7 @@ namespace HuyenRS232ToKeyboardTool
                 Clipboard.SetText(barcode);
 
                 SendKeys.SendWait("^v");
-
-                if (checkBoxCarriageReturn.Checked)
-                    SendKeys.SendWait("{ENTER}");
+                SendSendKeysCRLF();
 
                 return;
             }
@@ -125,6 +120,22 @@ namespace HuyenRS232ToKeyboardTool
                 SendCRLF(hwnd);
 
                 return;
+            }
+        }
+
+        /// <summary>
+        /// 根据用户选择的回车换行设置，使用 SendKeys 发送对应的消息到目标窗口
+        /// </summary>
+        private void SendSendKeysCRLF()
+        {
+            if (checkBoxCarriageReturn.Checked)
+            {
+                SendKeys.SendWait("{ENTER}");
+            }
+
+            if (checkBoxLineFeed.Checked)
+            {
+                SendKeys.SendWait("\n");
             }
         }
 
